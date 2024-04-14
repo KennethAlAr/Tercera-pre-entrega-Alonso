@@ -1,0 +1,27 @@
+{% extends 'partidas/base.html' %}
+
+{% block title %}Crear Juego{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <h2 class="mb-4">Crear Juego</h2>
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="card shadow-sm">
+                    <div class="card-header">
+                        Datos del Juego
+                    </div>
+                    <div class="card-body">
+                        <form method="POST" action="{% url 'crear-juego-con-form' %}"> 
+                            {% csrf_token %}  <!-- CSRF Token added here -->
+                            {{ create_form.as_p }}
+                            <button type="buscar" class="btn btn-primary">Crear Juego</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'partidas/base.html' %}
+
+{% block title %}Reservas del Jugador{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <h2 class="mb-4">Reservas del Jugador</h2>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="list-group">
+                    {% if todos_los_juegos %}
+                        {% for reserva in todos_los_juegos %}
+                            <div class="list-group-item list-group-item-action">
+                                <h5 class="mb-1">{{ reserva.juego }}</h5>
+                                <p class="mb-1">Sistema de juego: {{ reserva.juego.sistema_de_juego }}</p>
+                                <p class="mb-1">Descripción: {{ reserva.juego.descripcion | default:"No proporcionado" }}</p>
+                                <p class="mb-1">Fecha: {{ reserva.juego.fecha | date:"d/m/Y" }}</p>
+                                <p class="mb-1">Hora de inicio: {{ reserva.juego.hora_inicio | date:"H:i" }}</p>
+                                <p class="mb-1">Hora de fin: {{ reserva.juego.hora_fin | date:"H:i" }}</p>
+                                <a href="{% url 'detalle-partida' reserva.juego.id %}" class="btn btn-primary btn-sm">Ver Detalles</a>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="alert alert-info" role="alert">
+                            No se encontraron reservas para este jugador.
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
